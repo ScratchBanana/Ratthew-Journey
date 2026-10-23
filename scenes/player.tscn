@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c0k0hldu35ba6"]
+
+[ext_resource type="Texture2D" uid="uid://dbywdmminjj1q" path="res://icon.svg" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://duc52ush2bxeu" path="res://scenes/player.gd" id="1_g2els"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4s6jo"]
+size = Vector2(38, 38)
+
+[node name="player" type="CharacterBody2D" unique_id=1183945917]
+script = ExtResource("1_g2els")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1190548208]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_3vyb7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=263380684]
+shape = SubResource("RectangleShape2D_4s6jo")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2122511956]
+position_smoothing_enabled = true
+
+[node name="coyote_timer" type="Timer" parent="." unique_id=260205345]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="coyote_timer" to="." method="_on_coyote_timer_timeout"]
