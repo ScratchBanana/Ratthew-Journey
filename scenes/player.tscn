@@ -1,26 +1,144 @@
 [gd_scene format=3 uid="uid://c0k0hldu35ba6"]
 
-[ext_resource type="Texture2D" uid="uid://dbywdmminjj1q" path="res://icon.svg" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://duc52ush2bxeu" path="res://scenes/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://b7w61oafymte2" path="res://art/sprites/PlayerAnimationSpritesheet.png" id="2_g2els"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4s6jo"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wyf3"]
 size = Vector2(38, 38)
+
+[sub_resource type="Animation" id="Animation_g2els"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tuyoq"]
+resource_name = "fall"
+length = 0.39999999999999997
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18]
+}
+
+[sub_resource type="Animation" id="Animation_qhqgy"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_qlg0r"]
+resource_name = "jump"
+length = 0.19999999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_dqkch"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.49999997),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_fjrip"]
+resource_name = "slide"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqkch"]
+_data = {
+&"RESET": SubResource("Animation_g2els"),
+&"fall": SubResource("Animation_tuyoq"),
+&"idle": SubResource("Animation_qhqgy"),
+&"jump": SubResource("Animation_qlg0r"),
+&"run": SubResource("Animation_dqkch"),
+&"slide": SubResource("Animation_fjrip")
+}
 
 [node name="player" type="CharacterBody2D" unique_id=1183945917]
 script = ExtResource("1_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1190548208]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_3vyb7")
+position = Vector2(0, 19)
+scale = Vector2(2.35, 2.35)
+texture = ExtResource("2_g2els")
+offset = Vector2(0, -8)
+hframes = 19
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=263380684]
-shape = SubResource("RectangleShape2D_4s6jo")
+shape = SubResource("RectangleShape2D_4wyf3")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2122511956]
+ignore_rotation = false
 position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 3.0
 
 [node name="coyote_timer" type="Timer" parent="." unique_id=260205345]
 wait_time = 0.1
 one_shot = true
+
+[node name="anims" type="AnimationPlayer" parent="." unique_id=1336722565]
+libraries/ = SubResource("AnimationLibrary_dqkch")
 
 [connection signal="timeout" from="coyote_timer" to="." method="_on_coyote_timer_timeout"]
