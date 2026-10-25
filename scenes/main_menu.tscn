@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://cpibglefkpnw8"]
+
+[ext_resource type="Texture2D" uid="uid://cxmk8qrt3u1gl" path="res://art/ui/play_up.png" id="1_bqqt6"]
+[ext_resource type="Script" uid="uid://brgav1kmjakyh" path="res://scenes/main_menu.gd" id="1_oa1go"]
+[ext_resource type="Texture2D" uid="uid://70pmw5dfobhj" path="res://art/ui/play_down.png" id="2_wu84c"]
+[ext_resource type="Texture2D" uid="uid://ddo8d18tqttk8" path="res://art/ui/play_hover.png" id="3_8ln24"]
+[ext_resource type="Texture2D" uid="uid://drewsk300jr5x" path="res://art/ui/settings_up.png" id="4_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://di3pwfhld5tcn" path="res://art/ui/settings_down.png" id="5_oa1go"]
+[ext_resource type="Texture2D" uid="uid://dqf4vesdgg3mi" path="res://art/ui/settings_hover.png" id="6_tbmy8"]
+[ext_resource type="FontFile" uid="uid://c3lkbfvndao85" path="res://art/fonts/VCR_OSD_MONO_1.001.ttf" id="8_tbmy8"]
+[ext_resource type="FontFile" uid="uid://dnpn4l0n5rswo" path="res://art/fonts/PixelOperator.ttf" id="9_jk1qb"]
+[ext_resource type="Texture2D" uid="uid://crfg0ygaawsh6" path="res://art/ui/return_up.png" id="10_flqon"]
+[ext_resource type="Texture2D" uid="uid://bis7m62koue5u" path="res://art/ui/return_down.png" id="11_rcqid"]
+[ext_resource type="Texture2D" uid="uid://xjdur8i8rpdb" path="res://art/ui/return_hover.png" id="12_1ajci"]
+
+[node name="main_menu" type="Control" unique_id=701512400]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oa1go")
+
+[node name="main" type="Control" parent="." unique_id=132814023]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="main" unique_id=823765651]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -42.0
+offset_right = 70.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="play_button" type="TextureButton" parent="main/VBoxContainer" unique_id=957192936]
+custom_maximum_size = Vector2(140, 40)
+layout_mode = 2
+offset_transform_enabled = true
+texture_normal = ExtResource("1_bqqt6")
+texture_pressed = ExtResource("2_wu84c")
+texture_hover = ExtResource("3_8ln24")
+stretch_mode = 0
+
+[node name="settings_button" type="TextureButton" parent="main/VBoxContainer" unique_id=1717923448]
+layout_mode = 2
+texture_normal = ExtResource("4_rtw2f")
+texture_pressed = ExtResource("5_oa1go")
+texture_hover = ExtResource("6_tbmy8")
+
+[node name="settings" type="Control" parent="." unique_id=1291468675]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 640.0
+offset_right = 640.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="settings" unique_id=271944483]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="settings/MarginContainer" unique_id=680200253]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("8_tbmy8")
+theme_override_font_sizes/font_size = 64
+text = "SETTINGS"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="settings/MarginContainer" unique_id=1607175096]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 14
+
+[node name="HBoxContainer" type="HBoxContainer" parent="settings/MarginContainer/VBoxContainer" unique_id=1443937552]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="settings/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1251098194]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_jk1qb")
+theme_override_font_sizes/font_size = 24
+text = "Volume:"
+
+[node name="volume_slider" type="HSlider" parent="settings/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1277796574]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="return_button" type="TextureButton" parent="settings/MarginContainer/VBoxContainer" unique_id=1062625610]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("10_flqon")
+texture_pressed = ExtResource("11_rcqid")
+texture_hover = ExtResource("12_1ajci")
+
+[connection signal="pressed" from="main/VBoxContainer/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="main/VBoxContainer/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="value_changed" from="settings/MarginContainer/VBoxContainer/HBoxContainer/volume_slider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="settings/MarginContainer/VBoxContainer/return_button" to="." method="_on_return_button_pressed"]

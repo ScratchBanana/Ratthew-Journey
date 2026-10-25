@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
 const ACCEL = 10.0
-const SPEED = 650.0
-const JUMP_VELOCITY = -800.0
+const SPEED = 350.0
+const JUMP_VELOCITY = -700.0
 const GRAVITY = 2000
 const FALL_GRAVITY = 3000
 const SLIDE_MULT = 1.3
-const DEF_SCALE = Vector2(2.35, 2.35)
+const DEF_SCALE = Vector2(1.0, 1.0)
 
 @onready var coyote_timer: Timer = $coyote_timer
 @onready var cam: Camera2D = $Camera2D
