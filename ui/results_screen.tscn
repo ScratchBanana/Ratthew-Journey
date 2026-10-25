@@ -1,12 +1,19 @@
 [gd_scene format=4 uid="uid://cit2g6bgj3ldn"]
 
 [ext_resource type="Script" uid="uid://cbowekyfi8sgp" path="res://ui/results_screen.gd" id="1_3hmlf"]
-[ext_resource type="Texture2D" uid="uid://c81yu0nphx6qf" path="res://art/sprites/results_asset.png" id="1_ciowv"]
 [ext_resource type="FontFile" uid="uid://c3lkbfvndao85" path="res://art/fonts/VCR_OSD_MONO_1.001.ttf" id="2_jvlwe"]
 [ext_resource type="Texture2D" uid="uid://6xfpldnef6ck" path="res://art/sprites/sewer_bg_tile.png" id="2_vdvw7"]
 [ext_resource type="Texture2D" uid="uid://crfg0ygaawsh6" path="res://art/ui/return_up.png" id="3_3hmlf"]
+[ext_resource type="Texture2D" uid="uid://8vdaiw3ji14e" path="res://art/sprites/results_cheese.png" id="3_vdvw7"]
+[ext_resource type="Texture2D" uid="uid://bxnswt64vbjs6" path="res://art/sprites/results_text.png" id="4_nhsj8"]
 [ext_resource type="Texture2D" uid="uid://bis7m62koue5u" path="res://art/ui/return_down.png" id="4_vdvw7"]
+[ext_resource type="Texture2D" uid="uid://c0x2nakcuvxak" path="res://art/sprites/results_rat.png" id="5_ha0vw"]
 [ext_resource type="Texture2D" uid="uid://xjdur8i8rpdb" path="res://art/ui/return_hover.png" id="5_nhsj8"]
+[ext_resource type="AudioStream" uid="uid://cdehw82p2o1y" path="res://audio/sfx/universfield-ground-impact-352053.mp3" id="10_5c12h"]
+[ext_resource type="AudioStream" uid="uid://f3wqxawn7ds2" path="res://audio/sfx/stone-sliding.mp3" id="10_tgtqb"]
+[ext_resource type="AudioStream" uid="uid://dy4o0k1l84u5c" path="res://audio/sfx/universfield-punch-impact-hit-567196.mp3" id="12_4uoyu"]
+[ext_resource type="AudioStream" uid="uid://bg7cqr840gs5y" path="res://audio/sfx/spin_whoosh_sfx.wav" id="12_7j0ec"]
+[ext_resource type="AudioStream" uid="uid://dbj5tg3jalq7j" path="res://audio/sfx/button_click.wav" id="14_gsw8u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nhsj8"]
 texture = ExtResource("2_vdvw7")
@@ -21,59 +28,133 @@ script = ExtResource("1_3hmlf")
 
 [node name="bg" type="TileMapLayer" parent="." unique_id=425601249]
 scale = Vector2(3.5, 3.5)
-tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wMAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wUAAAAAAAAAAAD+/wYAAAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD//wYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAACAAUAAAAAAAAAAAACAAYAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAALAAYAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wMAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wUAAAAAAAAAAAD+/wYAAAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD//wYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAACAAUAAAAAAAAAAAACAAYAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAALAAYAAAAAAAAAAAD+/wcAAAAAAAAAAAD+/wgAAAAAAAAAAAD//wcAAAAAAAAAAAD//wgAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAABAAcAAAAAAAAAAAABAAgAAAAAAAAAAAACAAcAAAAAAAAAAAACAAgAAAAAAAAAAAADAAcAAAAAAAAAAAADAAgAAAAAAAAAAAAEAAcAAAAAAAAAAAAEAAgAAAAAAAAAAAAFAAcAAAAAAAAAAAAFAAgAAAAAAAAAAAAGAAcAAAAAAAAAAAAGAAgAAAAAAAAAAAAHAAcAAAAAAAAAAAAHAAgAAAAAAAAAAAAIAAcAAAAAAAAAAAAIAAgAAAAAAAAAAAAJAAcAAAAAAAAAAAAJAAgAAAAAAAAAAAAKAAcAAAAAAAAAAAAKAAgAAAAAAAAAAAALAAcAAAAAAAAAAAALAAgAAAAAAAAAAAD+//7/AAAAAAAAAAD+////AAAAAAAAAAD///7/AAAAAAAAAAD/////AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP//AAAAAAAAAAABAP7/AAAAAAAAAAABAP//AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP//AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP//AAAAAAAAAAAFAP7/AAAAAAAAAAAFAP//AAAAAAAAAAAGAP7/AAAAAAAAAAAGAP//AAAAAAAAAAAHAP7/AAAAAAAAAAAHAP//AAAAAAAAAAAIAP7/AAAAAAAAAAAIAP//AAAAAAAAAAAJAP7/AAAAAAAAAAAJAP//AAAAAAAAAAAKAP7/AAAAAAAAAAAKAP//AAAAAAAAAAALAP7/AAAAAAAAAAALAP//AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_ha0vw")
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=962444457]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(320, 180)
-texture = ExtResource("1_ciowv")
 
 [node name="Control" type="Control" parent="." unique_id=343449618]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 53.0
-offset_top = 106.0
-offset_right = 272.0
-offset_bottom = 318.0
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=1415523199]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer" unique_id=1443015874]
-custom_minimum_size = Vector2(0, 120)
-custom_maximum_size = Vector2(-1, 120)
-layout_mode = 2
+[node name="cheese" type="TextureRect" parent="Control" unique_id=1425517446]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -236.0
+offset_top = -236.0
+offset_right = 236.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(236, 236)
+texture = ExtResource("3_vdvw7")
+
+[node name="results_text" type="TextureRect" parent="Control" unique_id=23635524]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -236.0
+offset_top = -356.0
+offset_right = 236.0
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(236, 236)
+texture = ExtResource("4_nhsj8")
+
+[node name="little_guy" type="TextureRect" parent="Control" unique_id=623433427]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 320.0
+offset_top = -8.0
+offset_right = 584.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_ha0vw")
+
+[node name="Label" type="Label" parent="Control" unique_id=1031120875]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.5
+offset_top = -25.0
+offset_right = 229.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(229, 25)
 size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/separation = 45
-
-[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer" unique_id=1031120875]
-layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.13725491, 0.1254902, 0.20392157, 1)
+theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("2_jvlwe")
-theme_override_font_sizes/font_size = 32
-text = "TIME: xx:xx"
+theme_override_font_sizes/font_size = 52
+text = "TIME: 00:00:00"
+horizontal_alignment = 1
 
-[node name="return_button" type="TextureButton" parent="Control/MarginContainer/VBoxContainer" unique_id=1621635224]
-layout_mode = 2
+[node name="return_button" type="TextureButton" parent="Control" unique_id=1621635224]
+modulate = Color(0.37036446, 0.3703645, 0.37036446, 1)
+layout_mode = 0
+offset_left = 250.0
+offset_top = 310.0
+offset_right = 390.0
+offset_bottom = 350.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 texture_normal = ExtResource("3_3hmlf")
 texture_pressed = ExtResource("4_vdvw7")
 texture_hover = ExtResource("5_nhsj8")
 
-[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/return_button" to="." method="_on_return_button_pressed"]
+[node name="new_best" type="Label" parent="Control" unique_id=1773052153]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.0
+offset_top = 27.0
+offset_right = 53.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(53, 11.5)
+theme_override_colors/font_color = Color(0.76361275, 3.2969565e-06, 8.663535e-07, 1)
+theme_override_fonts/font = ExtResource("2_jvlwe")
+theme_override_font_sizes/font_size = 20
+text = "New Best!"
+
+[node name="impact_sfx" type="AudioStreamPlayer" parent="." unique_id=1529768201]
+stream = ExtResource("10_5c12h")
+
+[node name="slide_sfx" type="AudioStreamPlayer" parent="." unique_id=1156952888]
+stream = ExtResource("10_tgtqb")
+
+[node name="whoosh_sfx" type="AudioStreamPlayer" parent="." unique_id=1223750383]
+stream = ExtResource("12_7j0ec")
+
+[node name="mini_impact" type="AudioStreamPlayer" parent="." unique_id=593882728]
+stream = ExtResource("12_4uoyu")
+
+[node name="button_click_sfx" type="AudioStreamPlayer" parent="." unique_id=507152077]
+stream = ExtResource("14_gsw8u")
+
+[connection signal="pressed" from="Control/return_button" to="." method="_on_return_button_pressed"]

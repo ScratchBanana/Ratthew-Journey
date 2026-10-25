@@ -4,14 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://wuo044b8gnih" path="res://art/sprites/sewer_tileset.png" id="2_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://c0k0hldu35ba6" path="res://scenes/player.tscn" id="2_rwgxs"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k0juu"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4wyf3"]
 texture = ExtResource("1_4wyf3")
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_71j4m"]
-sources/0 = SubResource("TileSetAtlasSource_k0juu")
+sources/0 = SubResource("TileSetAtlasSource_4wyf3")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rwgxs"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k0juu"]
 texture = ExtResource("2_4wyf3")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -306,7 +306,7 @@ physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
-sources/0 = SubResource("TileSetAtlasSource_rwgxs")
+sources/0 = SubResource("TileSetAtlasSource_k0juu")
 
 [node name="world" type="Node2D" unique_id=1695393278]
 

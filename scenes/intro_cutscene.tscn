@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://dqt8i3bokgklo"]
+
+[ext_resource type="Script" uid="uid://du0xoe2trd64r" path="res://scenes/intro_cutscene.gd" id="1_juow0"]
+[ext_resource type="FontFile" uid="uid://dnpn4l0n5rswo" path="res://art/fonts/PixelOperator.ttf" id="1_vuduy"]
+[ext_resource type="AudioStream" uid="uid://d1i5kxcucf75g" path="res://audio/sfx/pop_sfx.wav" id="3_3438a"]
+
+[node name="intro_cutscene" type="Control" unique_id=113347627]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_juow0")
+lines = Array[String](["Ratthew... what have you done?", "I knew you loved your cheese, but... this is too much!", "Breaking gravity? Because you're so dense?", "I thought you were just a little guy!"])
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=326106364]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=28369363]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("1_vuduy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="." unique_id=1927616904]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -70.0
+offset_top = -35.0
+offset_right = 70.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_vuduy")
+text = "[LMB] to Continue"
+horizontal_alignment = 1
+
+[node name="pop_sfx" type="AudioStreamPlayer" parent="." unique_id=2041552525]
+stream = ExtResource("3_3438a")
+volume_db = -4.0
+pitch_scale = 2.15

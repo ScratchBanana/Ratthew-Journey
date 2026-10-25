@@ -2,9 +2,39 @@
 
 [ext_resource type="Texture2D" uid="uid://tbqgttn3kmnv" path="res://art/sprites/sewer_grate.png" id="1_jbojv"]
 [ext_resource type="Script" uid="uid://d0lfj2bqoxpww" path="res://scenes/goal.gd" id="1_sx1j4"]
+[ext_resource type="AudioStream" uid="uid://cpjodmmt6mqjg" path="res://audio/sfx/confetti_popper_sfx.wav" id="3_w3gav"]
+[ext_resource type="AudioStream" uid="uid://dh415lu5vupr8" path="res://audio/music/game_music.mp3" id="4_jvyg3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4s6jo"]
 radius = 16.0
+
+[sub_resource type="Gradient" id="Gradient_sx1j4"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3647541, 0.6721311)
+colors = PackedColorArray(0.39908487, 0.5483046, 0.93244165, 1, 0.20003736, 0.7290684, 0.42934456, 1, 0.9991043, 0.62944865, 0.62389284, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jvyg3"]
+gradient = SubResource("Gradient_sx1j4")
+
+[sub_resource type="Curve" id="Curve_w3gav"]
+_data = [Vector2(0, 0.6914499), 0.0, 0.0, 0, 0, Vector2(0.52684563, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.24163574), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_sx1j4"]
+curve = SubResource("Curve_w3gav")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4s6jo"]
+particle_flag_disable_z = true
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 60.0
+gravity = Vector3(0, 50, 0)
+damping_max = 38.462
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_sx1j4")
+color_initial_ramp = SubResource("GradientTexture1D_jvyg3")
 
 [node name="goal" type="Node2D" unique_id=1752366457]
 script = ExtResource("1_sx1j4")
@@ -16,5 +46,20 @@ texture = ExtResource("1_jbojv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1236326471]
 shape = SubResource("CircleShape2D_4s6jo")
+
+[node name="pop_sfx" type="AudioStreamPlayer" parent="." unique_id=1022974046]
+stream = ExtResource("3_w3gav")
+
+[node name="confetti_particles" type="GPUParticles2D" parent="." unique_id=1174510400]
+emitting = false
+amount = 24
+one_shot = true
+preprocess = 0.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_4s6jo")
+
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=1098117723]
+stream = ExtResource("4_jvyg3")
+volume_db = -8.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://q0ciigxamygo" path="res://ui/hovered_button_style.tres" id="2_a04ps"]
 [ext_resource type="StyleBox" uid="uid://b5ux7c5sdw8xo" path="res://ui/pressed_button_style.tres" id="3_q0k5o"]
 [ext_resource type="FontFile" uid="uid://dnpn4l0n5rswo" path="res://art/fonts/PixelOperator.ttf" id="6_tfehh"]
+[ext_resource type="AudioStream" uid="uid://dbj5tg3jalq7j" path="res://audio/sfx/button_click.wav" id="7_h5qee"]
 
 [node name="level_select_button" type="Button" unique_id=112681471]
 custom_minimum_size = Vector2(65, 65)
@@ -45,5 +46,8 @@ theme_override_font_sizes/font_size = 24
 text = "TIME"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="button_click_sfx" type="AudioStreamPlayer" parent="." unique_id=1420167157]
+stream = ExtResource("7_h5qee")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

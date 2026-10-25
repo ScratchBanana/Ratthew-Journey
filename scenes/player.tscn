@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://duc52ush2bxeu" path="res://scenes/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://b7w61oafymte2" path="res://art/sprites/PlayerAnimationSpritesheet.png" id="2_g2els"]
+[ext_resource type="Texture2D" uid="uid://b7dps7t1xx0rt" path="res://art/sprites/dust_particle.png" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://bl41uolwy6qvg" path="res://audio/sfx/jump_sfx.wav" id="4_dqkch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wyf3"]
 size = Vector2(14, 15)
@@ -115,6 +117,32 @@ _data = {
 &"slide": SubResource("Animation_fjrip")
 }
 
+[sub_resource type="Gradient" id="Gradient_dqkch"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rm2iy"]
+gradient = SubResource("Gradient_dqkch")
+
+[sub_resource type="Curve" id="Curve_qlg0r"]
+_data = [Vector2(0, 0.73977697), 0.0, 0.0, 0, 0, Vector2(1, 0.36802977), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_y53tw"]
+curve = SubResource("Curve_qlg0r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4s6jo"]
+particle_flag_disable_z = true
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0.96, 0.25, 0)
+spread = 15.0
+initial_velocity_min = -25.0
+initial_velocity_max = -25.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_y53tw")
+color = Color(1, 1, 1, 0.5254902)
+color_ramp = SubResource("GradientTexture1D_rm2iy")
+
 [node name="player" type="CharacterBody2D" unique_id=1183945917 groups=["player"]]
 script = ExtResource("1_g2els")
 
@@ -139,5 +167,14 @@ one_shot = true
 
 [node name="anims" type="AnimationPlayer" parent="." unique_id=1336722565]
 libraries/ = SubResource("AnimationLibrary_dqkch")
+
+[node name="slide_particles" type="GPUParticles2D" parent="." unique_id=1889248830]
+emitting = false
+amount = 6
+texture = ExtResource("3_qhqgy")
+process_material = SubResource("ParticleProcessMaterial_4s6jo")
+
+[node name="jump_sfx" type="AudioStreamPlayer" parent="." unique_id=1325129448]
+stream = ExtResource("4_dqkch")
 
 [connection signal="timeout" from="coyote_timer" to="." method="_on_coyote_timer_timeout"]

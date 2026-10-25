@@ -12,6 +12,9 @@ const DEF_SCALE = Vector2(1.0, 1.0)
 @onready var cam: Camera2D = $Camera2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var anims: AnimationPlayer = $anims
+@onready var slide_particles: GPUParticles2D = $slide_particles
+@onready var jump_sfx: AudioStreamPlayer = $jump_sfx
+
 
 var grav_dir = Vector2.DOWN
 var was_on_floor = false
@@ -37,6 +40,8 @@ func jump():
 	if (was_on_floor && is_on_wall()):
 		can_flip_grav = false
 	anims.play("jump")
+	jump_sfx.pitch_scale = 1.0 + randf_range(-0.1, 0.1)
+	jump_sfx.play()
 	sprite.scale = Vector2(0.35 * DEF_SCALE.x, 1.6 * DEF_SCALE.y)
 	velocity.y = grav_dir.y * JUMP_VELOCITY
 	velocity.x = grav_dir.x * JUMP_VELOCITY
@@ -149,9 +154,20 @@ func _physics_process(delta: float) -> void:
 			else:
 				sprite.flip_h = false
 			if (!sliding):
+				slide_particles.emitting = false
 				anims.play("run")
-			elif (sliding || Input.is_action_pressed("slide")):
+			elif (sliding):
 				anims.play("slide")
+				if (grav_dir_is_vertical()):
+					if (abs(velocity.x) > 0.3):
+						slide_particles.emitting = true
+					else:
+						slide_particles.emitting = false
+				else:
+					if (abs(velocity.y) > 0.3):
+						slide_particles.emitting = true
+					else:
+						slide_particles.emitting = false
 		else:
 			anims.play("idle")
 	else:

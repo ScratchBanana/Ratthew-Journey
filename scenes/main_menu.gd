@@ -7,28 +7,41 @@ extends Control
 @onready var settings_button: TextureButton = $main/VBoxContainer/settings_button
 @onready var button_container: VBoxContainer = $main/VBoxContainer
 
+@onready var anims: AnimationPlayer = $AnimationPlayer
+@onready var button_click_sfx: AudioStreamPlayer = $button_click_sfx
+
+@onready var music: AudioStreamPlayer = $music
+@onready var title_art: TextureRect = $main/title_art
+
+var tick = 0.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	anims.play("menu_anim")
+	music.play()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	
+	title_art.rotation = deg_to_rad(0.0 + 2.0 * sin(0.5 * tick))
+	tick += delta
 
 
 func _on_play_button_pressed() -> void:
+	button_click_sfx.play()
 	await Blackout.black_out()
-	get_tree().change_scene_to_file("res://scenes/level_select.tscn")
+	get_tree().change_scene_to_file("res://scenes/intro_cutscene.tscn")
 	Blackout.black_in()
 
 func _on_settings_button_pressed() -> void:
+	button_click_sfx.play()
 	open_settings()
 
 func _on_return_button_pressed() -> void:
+	button_click_sfx.play()
 	close_settings()
 
 func _on_volume_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(0, linear_to_db(value))
+	AudioServer.set_bus_volume_db(0, value)
 
 func open_settings():
 	var tween = get_tree().create_tween().set_parallel(true)
