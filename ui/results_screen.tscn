@@ -1,0 +1,79 @@
+[gd_scene format=4 uid="uid://cit2g6bgj3ldn"]
+
+[ext_resource type="Script" uid="uid://cbowekyfi8sgp" path="res://ui/results_screen.gd" id="1_3hmlf"]
+[ext_resource type="Texture2D" uid="uid://c81yu0nphx6qf" path="res://art/sprites/results_asset.png" id="1_ciowv"]
+[ext_resource type="FontFile" uid="uid://c3lkbfvndao85" path="res://art/fonts/VCR_OSD_MONO_1.001.ttf" id="2_jvlwe"]
+[ext_resource type="Texture2D" uid="uid://6xfpldnef6ck" path="res://art/sprites/sewer_bg_tile.png" id="2_vdvw7"]
+[ext_resource type="Texture2D" uid="uid://crfg0ygaawsh6" path="res://art/ui/return_up.png" id="3_3hmlf"]
+[ext_resource type="Texture2D" uid="uid://bis7m62koue5u" path="res://art/ui/return_down.png" id="4_vdvw7"]
+[ext_resource type="Texture2D" uid="uid://xjdur8i8rpdb" path="res://art/ui/return_hover.png" id="5_nhsj8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nhsj8"]
+texture = ExtResource("2_vdvw7")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ha0vw"]
+sources/0 = SubResource("TileSetAtlasSource_nhsj8")
+
+[node name="results_screen" type="CanvasLayer" unique_id=1257460626]
+layer = 0
+script = ExtResource("1_3hmlf")
+
+[node name="bg" type="TileMapLayer" parent="." unique_id=425601249]
+scale = Vector2(3.5, 3.5)
+tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wMAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wUAAAAAAAAAAAD+/wYAAAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD//wYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAACAAUAAAAAAAAAAAACAAYAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAALAAYAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_ha0vw")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=962444457]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 180)
+texture = ExtResource("1_ciowv")
+
+[node name="Control" type="Control" parent="." unique_id=343449618]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 53.0
+offset_top = 106.0
+offset_right = 272.0
+offset_bottom = 318.0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=1415523199]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer" unique_id=1443015874]
+custom_minimum_size = Vector2(0, 120)
+custom_maximum_size = Vector2(-1, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 45
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer" unique_id=1031120875]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jvlwe")
+theme_override_font_sizes/font_size = 32
+text = "TIME: xx:xx"
+
+[node name="return_button" type="TextureButton" parent="Control/MarginContainer/VBoxContainer" unique_id=1621635224]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_3hmlf")
+texture_pressed = ExtResource("4_vdvw7")
+texture_hover = ExtResource("5_nhsj8")
+
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/return_button" to="." method="_on_return_button_pressed"]

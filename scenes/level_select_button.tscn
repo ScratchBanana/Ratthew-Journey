@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://ds0thg7xvl25o"]
+
+[ext_resource type="FontFile" uid="uid://c3lkbfvndao85" path="res://art/fonts/VCR_OSD_MONO_1.001.ttf" id="1_5au5s"]
+[ext_resource type="Script" uid="uid://cvme7x7718sje" path="res://scenes/level_select_button.gd" id="1_qa675"]
+[ext_resource type="StyleBox" uid="uid://c01ivlswdfos5" path="res://ui/up_button_style.tres" id="1_s1cbd"]
+[ext_resource type="StyleBox" uid="uid://q0ciigxamygo" path="res://ui/hovered_button_style.tres" id="2_a04ps"]
+[ext_resource type="StyleBox" uid="uid://b5ux7c5sdw8xo" path="res://ui/pressed_button_style.tres" id="3_q0k5o"]
+[ext_resource type="FontFile" uid="uid://dnpn4l0n5rswo" path="res://art/fonts/PixelOperator.ttf" id="6_tfehh"]
+
+[node name="level_select_button" type="Button" unique_id=112681471]
+custom_minimum_size = Vector2(65, 65)
+custom_maximum_size = Vector2(65, 65)
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/normal = ExtResource("1_s1cbd")
+theme_override_styles/pressed = ExtResource("3_q0k5o")
+theme_override_styles/hover = ExtResource("2_a04ps")
+script = ExtResource("1_qa675")
+
+[node name="Label" type="Label" parent="." unique_id=273262143]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_5au5s")
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="time" type="Label" parent="." unique_id=781338038]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_tfehh")
+theme_override_font_sizes/font_size = 24
+text = "TIME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

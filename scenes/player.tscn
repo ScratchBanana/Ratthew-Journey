@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b7w61oafymte2" path="res://art/sprites/PlayerAnimationSpritesheet.png" id="2_g2els"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wyf3"]
-size = Vector2(16, 16)
+size = Vector2(14, 15)
 
 [sub_resource type="Animation" id="Animation_g2els"]
 length = 0.001
@@ -115,7 +115,7 @@ _data = {
 &"slide": SubResource("Animation_fjrip")
 }
 
-[node name="player" type="CharacterBody2D" unique_id=1183945917]
+[node name="player" type="CharacterBody2D" unique_id=1183945917 groups=["player"]]
 script = ExtResource("1_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1190548208]
@@ -124,7 +124,7 @@ offset = Vector2(0, -8)
 hframes = 19
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=263380684]
-position = Vector2(0, -8)
+position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_4wyf3")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2122511956]

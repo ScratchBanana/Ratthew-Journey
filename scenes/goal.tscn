@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://2tdubg5gg57l"]
+
+[ext_resource type="Texture2D" uid="uid://tbqgttn3kmnv" path="res://art/sprites/sewer_grate.png" id="1_jbojv"]
+[ext_resource type="Script" uid="uid://d0lfj2bqoxpww" path="res://scenes/goal.gd" id="1_sx1j4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4s6jo"]
+radius = 16.0
+
+[node name="goal" type="Node2D" unique_id=1752366457]
+script = ExtResource("1_sx1j4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2137846507]
+texture = ExtResource("1_jbojv")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=872504271]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1236326471]
+shape = SubResource("CircleShape2D_4s6jo")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -20,6 +20,8 @@ var can_jump = true
 var can_flip_grav = false
 var sliding = false
 
+var can_move = true
+
 func get_grav(velo: Vector2):
 	if (grav_dir_is_vertical()):
 		if (sign(grav_dir.x) * velo.x < 0.0):
@@ -47,6 +49,9 @@ func grav_dir_is_vertical():
 	return false
 
 func _physics_process(delta: float) -> void:
+	if (!can_move):
+		return
+	
 	velocity = get_real_velocity()
 	
 	# Add the gravity.
@@ -145,7 +150,7 @@ func _physics_process(delta: float) -> void:
 				sprite.flip_h = false
 			if (!sliding):
 				anims.play("run")
-			else:
+			elif (sliding || Input.is_action_pressed("slide")):
 				anims.play("slide")
 		else:
 			anims.play("idle")
@@ -163,3 +168,6 @@ func _process(delta: float) -> void:
 func _on_coyote_timer_timeout() -> void:
 	if (!is_on_floor()):
 		can_jump = false
+
+func set_can_move(value: bool):
+	can_move = value
