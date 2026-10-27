@@ -22,14 +22,12 @@ An in-depth paragraph about your project and overview of use.
 
 ## Authors
 
-Jeremy Ruark
-[@Just_Kidding102] (https://just-kidding102.itch.io)
-Alastair Ruark
-[@EleventhAttic34] (https://eleventhattic34.itch.io)
+* Jeremy Ruark
+    * [@Just_Kidding102] (https://just-kidding102.itch.io)
+* Alastair Ruark
+    * [@EleventhAttic34] (https://eleventhattic34.itch.io)
 
 ## Version History
 
-* 0.2
-    * Various bug fixes and optimizations
 * 0.1
     * Initial Release
